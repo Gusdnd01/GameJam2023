@@ -18,7 +18,7 @@ public class MapSpawn : MonoBehaviour
     private MapList mapList;
 
 
-    public bool HitDoor = false;
+    public bool Spawned = false;
 
 
     // public Vector3 DoorPos;
@@ -28,63 +28,51 @@ public class MapSpawn : MonoBehaviour
     // [SerializeField] private LayerMask isLayer;
 
 
-    void Start()
+    private void Awake()
     {
         mapList = FindObjectOfType<MapList>();
+        SpawnNextMap();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !Spawned)
         {
             SpawnNextMap();
+            Spawned = true;
         }
-        // RaycastHit2D hit =
-        // Physics2D.BoxCast(transform.position, DoorSize, 0, DoorPos, 5);
-
-        // Gizmos.color = Color.red;
-        // Debug.DrawRay(transform.position, Vector3.left * hit.distance);
-        // Debug.dra
-        // RaycastHit2D ray = Physics2D.Raycast(transform.position, transform.right, isLayer);
-        // if (ray.collider != null)
-        // {
-
-
-        //     if (ray.collider.CompareTag("enemy"))
-        //     {
-        //         Destroy(gameObject);
-        //     }
-
-
-        //}
-        // HitDoor = Physics2D.OverlapBox(Pos.position, DoorSize, isLayer);
     }
 
     int RandomMap;
     private void SpawnNextMap()
     {
+        //mapList.SpawnRoom[0].GetComponent<DoorBreak>().
+
         switch (need)
         {
             case NeedDoorPos.Top:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedTob.Count);
-                Instantiate(mapList.NeedTob[RandomMap], transform.position, Quaternion.identity);
+                GameObject roomT = Instantiate(mapList.NeedTob[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomT);
                 break;
             case NeedDoorPos.Bottom:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedBoT.Count);
-                Instantiate(mapList.NeedBoT[RandomMap], transform.position, Quaternion.identity);
+                GameObject roomB = Instantiate(mapList.NeedBoT[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomB);
                 break;
             case NeedDoorPos.Left:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedL.Count);
-                Instantiate(mapList.NeedL[RandomMap], transform.position, Quaternion.identity);
+                GameObject roomL = Instantiate(mapList.NeedL[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomL);
                 break;
             case NeedDoorPos.Right:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedR.Count);
-                Instantiate(mapList.NeedR[RandomMap], transform.position, Quaternion.identity);
+                GameObject roomR = Instantiate(mapList.NeedR[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomR);
                 break;
         }
-
 
     }
 
