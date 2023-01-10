@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class MapList : MonoBehaviour
+public class MapManager : MonoBehaviour
 {
 
     [Header("Rooms")]
@@ -18,15 +18,47 @@ public class MapList : MonoBehaviour
     public List<GameObject> Decorations;
     [Space]
     public List<ParticleSystem> MagicPoof;
+    public float nowTimer;
     private MapSpawn mapSpawn;
+    int stage;
+
+    public int Stage
+    {
+        get => stage;
+        set
+        {
+            nowTimer = 30 + ((stage % 100 / 10) * 5);
+            stage = value;
+        }
+    }
 
     private void Start()
     {
+        stage = 0;
         mapSpawn = GetComponent<MapSpawn>();
         mapSpawn.SpawnNextMap();
     }
 
-    private void FixedUpdate()
+    private void Update()
+    {
+        if (nowTimer > 0)
+        {
+            nowTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (SpawnRoom.Count > 2)
+            {
+                SpawnRoom[1].GetComponent<MapSpawn>().SpawnNextMap();
+            }
+            else
+            {
+                SpawnRoom[0].GetComponent<MapSpawn>().SpawnNextMap();
+            }
+        }
+    }
+
+    private void DestroyRoom()
     {
         if (SpawnRoom.Count > 2)
         {

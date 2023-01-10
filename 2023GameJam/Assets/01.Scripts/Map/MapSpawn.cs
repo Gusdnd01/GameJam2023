@@ -15,14 +15,14 @@ public class MapSpawn : MonoBehaviour
     };
 
     [SerializeField] private NeedDoorPos need;
-    private MapList mapList;
+    private MapManager mapList;
     public bool Spawned = false;
 
 
 
     private void Awake()
     {
-        mapList = FindObjectOfType<MapList>();
+        mapList = FindObjectOfType<MapManager>();
     }
 
 
