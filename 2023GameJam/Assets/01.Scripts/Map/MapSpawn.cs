@@ -38,29 +38,42 @@ public class MapSpawn : MonoBehaviour
     int RandomMap;
     public void SpawnNextMap()
     {
-        //mapList.SpawnRoom[0].GetComponent<DoorBreak>().
+        GameObject roomOBJ;
+        GameObject deco;
 
         switch (need)
         {
             case NeedDoorPos.Top:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedTob.Count);
-                GameObject roomT = Instantiate(mapList.NeedTob[RandomMap], transform.position, Quaternion.identity);
-                mapList.SpawnRoom.Add(roomT);
+                roomOBJ = Instantiate(mapList.NeedTob[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomOBJ);
+                RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
+                deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
+                deco.transform.SetParent(roomOBJ.transform);
                 break;
             case NeedDoorPos.Bottom:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedBoT.Count);
-                GameObject roomB = Instantiate(mapList.NeedBoT[RandomMap], transform.position, Quaternion.identity);
-                mapList.SpawnRoom.Add(roomB);
+                roomOBJ = Instantiate(mapList.NeedBoT[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomOBJ);
+                RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
+                deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
+                deco.transform.SetParent(roomOBJ.transform);
                 break;
             case NeedDoorPos.Left:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedL.Count);
-                GameObject roomL = Instantiate(mapList.NeedL[RandomMap], transform.position, Quaternion.identity);
-                mapList.SpawnRoom.Add(roomL);
+                roomOBJ = Instantiate(mapList.NeedL[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomOBJ);
+                RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
+                deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
+                deco.transform.SetParent(roomOBJ.transform);
                 break;
             case NeedDoorPos.Right:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedR.Count);
-                GameObject roomR = Instantiate(mapList.NeedR[RandomMap], transform.position, Quaternion.identity);
-                mapList.SpawnRoom.Add(roomR);
+                roomOBJ = Instantiate(mapList.NeedR[RandomMap], transform.position, Quaternion.identity);
+                mapList.SpawnRoom.Add(roomOBJ);
+                RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
+                deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
+                deco.transform.SetParent(roomOBJ.transform);
                 break;
         }
         Spawned = true;
