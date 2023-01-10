@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamaged
 {
     public FixedJoystick joyStick;
     public Animator anim;
+    public float hp;
+    public float speed;
+    
     private Rigidbody2D rb;
 
     private void Awake() {
@@ -22,6 +25,18 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("MoveX", dir.x);
         anim.SetFloat("MoveY", dir.y);
 
-        rb.velocity = dir * 5;
+        rb.velocity = dir *speed;
+    }
+
+    public void OnDamaged(float damage){
+        hp -= damage;
+        if(hp <= 0){
+            OnDie();
+        }
+    }
+
+    private void OnDie(){
+        anim.SetBool("Die", true);
+        speed = 0;
     }
 }

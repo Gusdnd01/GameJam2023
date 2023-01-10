@@ -1,7 +1,34 @@
 fileFormatVersion: 2
-guid: f9516105e89f20740be4aa8c2291ecff
+guid: 7f03fb955eb09614eb29fcc873efdb33
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8675541625601121079
+    second: "cat-spritesheet\uC218\uC815\uBCF8_27"
+  - first:
+      213: -4400496948998648980
+    second: "cat-spritesheet\uC218\uC815\uBCF8_30"
+  - first:
+      213: -4448948612410254259
+    second: "cat-spritesheet\uC218\uC815\uBCF8_33"
+  - first:
+      213: 719847975392045533
+    second: "cat-spritesheet\uC218\uC815\uBCF8_71"
+  - first:
+      213: -8364169473033620833
+    second: "cat-spritesheet\uC218\uC815\uBCF8_72"
+  - first:
+      213: -7516556508138916106
+    second: "cat-spritesheet\uC218\uC815\uBCF8_73"
+  - first:
+      213: 5741083640264160137
+    second: "cat-spritesheet\uC218\uC815\uBCF8_74"
+  - first:
+      213: -7591813906286244550
+    second: "cat-spritesheet\uC218\uC815\uBCF8_75"
+  - first:
+      213: -4612790789664281178
+    second: "cat-spritesheet\uC218\uC815\uBCF8_76"
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -41,12 +68,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,7 +140,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "cat-spritesheet\uC218\uC815\uBCF8_27"
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 165
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c42ee34bd84a9780800000000000000
+      internalID: -8675541625601121079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "cat-spritesheet\uC218\uC815\uBCF8_30"
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 165
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6bceb7f65b4ee2c0800000000000000
+      internalID: -4400496948998648980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "cat-spritesheet\uC218\uC815\uBCF8_33"
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 165
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4cd15dfec82242c0800000000000000
+      internalID: -4448948612410254259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
