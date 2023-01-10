@@ -40,6 +40,7 @@ public class MapSpawn : MonoBehaviour
     {
         GameObject roomOBJ;
         GameObject deco;
+        //GameObject par;
 
         switch (need)
         {
@@ -50,6 +51,8 @@ public class MapSpawn : MonoBehaviour
                 RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
                 deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
                 deco.transform.SetParent(roomOBJ.transform);
+                mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
+                mapList.MagicPoof[1].Play();
                 break;
             case NeedDoorPos.Bottom:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedBoT.Count);
@@ -58,6 +61,8 @@ public class MapSpawn : MonoBehaviour
                 RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
                 deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
                 deco.transform.SetParent(roomOBJ.transform);
+                mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
+                mapList.MagicPoof[1].Play();
                 break;
             case NeedDoorPos.Left:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedL.Count);
@@ -66,6 +71,8 @@ public class MapSpawn : MonoBehaviour
                 RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
                 deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
                 deco.transform.SetParent(roomOBJ.transform);
+                mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
+                mapList.MagicPoof[1].Play();
                 break;
             case NeedDoorPos.Right:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedR.Count);
@@ -74,6 +81,8 @@ public class MapSpawn : MonoBehaviour
                 RandomMap = UnityEngine.Random.Range(0, mapList.Decorations.Count);
                 deco = Instantiate(mapList.Decorations[RandomMap], transform.position, Quaternion.identity);
                 deco.transform.SetParent(roomOBJ.transform);
+                mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
+                mapList.MagicPoof[1].Play();
                 break;
         }
         Spawned = true;

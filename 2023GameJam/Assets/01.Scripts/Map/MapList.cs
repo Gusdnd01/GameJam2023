@@ -16,6 +16,8 @@ public class MapList : MonoBehaviour
     public List<GameObject> SpawnRoom;
     [Space]
     public List<GameObject> Decorations;
+    [Space]
+    public List<ParticleSystem> MagicPoof;
     private MapSpawn mapSpawn;
 
     private void Start()
@@ -28,12 +30,18 @@ public class MapList : MonoBehaviour
     {
         if (SpawnRoom.Count > 2)
         {
+            MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
+            MagicPoof[0].Play();
+
             Destroy(SpawnRoom[0]);
             SpawnRoom.RemoveAt(0);
             Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
         }
         else if (SpawnRoom.Count == 2 && SpawnRoom[0].transform.childCount > 4)
         {
+            MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
+            MagicPoof[0].Play();
+
             Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
             Destroy(GameObject.Find("FirstMap"));
         }
