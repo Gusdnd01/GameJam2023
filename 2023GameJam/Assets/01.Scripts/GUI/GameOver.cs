@@ -7,30 +7,44 @@ using DG.Tweening;
 public class GameOver : MonoBehaviour
 {
     [Header("reference")]
-    [SerializeField] private GameObject GameOverOBJ;
+    [SerializeField] private Image GameOverOBJ;
     [SerializeField] private TextMeshProUGUI ScoreTXT;
 
-    [Space]
-    [SerializeField] private float MoveSpeed = 5;
-    public bool MoveDown { get; set; }
+    public bool MoveDownbool
+    {
+        get
+        {
+            return MoveDownbool;
+        }
+        set
+        {
+            if (MoveDownbool)
+            {
+                MoveDown();
+                return;
+            }
+        }
+    }
+
+    private RectTransform GameoverRect;
+
 
     private void Start()
     {
-        MoveDown = true;
+        GameoverRect = GameOverOBJ.GetComponent<RectTransform>();
     }
 
     private void Update()
     {
-        if (MoveDown)
-        {
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(-493.8377f, -67.19513f, -267.376f), MoveSpeed * Time.deltaTime);
-            GameOverOBJ.transform.DOMove(new Vector3(-493.8377f, -67.19513f, -267.376f), 3).SetEase(Ease.Linear).SetEase(Ease.OutElastic);
-        }
-        else
-        {
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(-493.8377f, 1873, -267.376f), MoveSpeed * Time.deltaTime);
-            GameOverOBJ.transform.DOMove(new Vector3(-493.8377f, 1873, -267.376f), 3).SetEase(Ease.Linear).SetEase(Ease.OutElastic);
-        }
+
+
+    }
+
+    public void MoveDown()
+    {
+        GameoverRect.DOAnchorPosY(0, 1).SetEase(Ease.InExpo).SetEase(Ease.OutBounce);
+
+        //GameoverRect.DOAnchorPosY(1939.68f, 1.5f).SetEase(Ease.InExpo).SetEase(Ease.OutBounce);
     }
 
 
