@@ -2,19 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : EnemyBase, IDamaged
+public class Enemy : EnemyBase
 {
     protected override void Reset()
     {
-        hp = enemyData.hp;
-    }
-    public void OnDamaged(float damage)
-    {
-        hp -= damage;
-
-        if(hp <= 0){
-            ChangeState(3);
-        }
+        speed = enemyData.speed;
     }
 
     protected override void AttackAction()
@@ -25,15 +17,14 @@ public class Enemy : EnemyBase, IDamaged
             cols.GetComponent<IDamaged>().OnDamaged(5f);
         }
         
-        moveDir = Vector2.zero;
+        speed = .1f;
         _rb.velocity = moveDir;
-        
-        enemyData.speed = 2f;
     }
 
     protected override void DieAction()
     {
         moveDir = Vector2.zero;
+        speed = 0;
     }
 
     protected override float EnemyToPlayerDistance()
@@ -47,16 +38,16 @@ public class Enemy : EnemyBase, IDamaged
     protected override void IdleAction()
     {
         moveDir = Vector2.zero;
+        speed = 0;
         enemyAnimator.SetFloat("MoveX", 0);
         enemyAnimator.SetFloat("MoveY", 0);
     }
 
     protected override void MoveAction()
     {
+        speed = 3f;
         enemyAnimator.SetFloat("MoveX", moveDir.x);
         enemyAnimator.SetFloat("MoveY", moveDir.y);
-        moveDir = (target.position - transform.position).normalized * enemyData.speed;
         _rb.velocity = moveDir;
-        enemyData.speed = 5f;
     }
 }

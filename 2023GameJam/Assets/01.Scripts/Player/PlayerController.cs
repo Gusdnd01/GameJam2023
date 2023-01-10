@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamaged
 
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
+        joyStick= FindObjectOfType<FixedJoystick>();
     }
 
     private void Update() {

@@ -16,7 +16,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField]protected Rigidbody2D _rb;
 
     protected Vector2 moveDir;
-    protected float hp;
+    protected float speed;
 
     [SerializeField] protected EnemyData enemyData;
     [SerializeField] protected Animator enemyAnimator;
@@ -57,22 +57,26 @@ public abstract class EnemyBase : MonoBehaviour
 
     public void ChangeAction(){
         float distance = EnemyToPlayerDistance();
-        if(distance <= 10){
+        if(distance <= enemyData.checkDistance){
             ChangeState(1);
             if(distance <= enemyData.attackDistance){
                 ChangeState(2);
             }
+            moveDir = (target.position - transform.position).normalized * speed;
         }
-        else ChangeState(0);
+        else {
+            ChangeState(0);
+            moveDir = Vector2.zero;
+        }
     }
 
     protected void Awake() {
         _rb = GetComponent<Rigidbody2D>();
+        Reset();
     }
     private void Start() {
         target = GameManager.Instance.PlayerTrm;
         StartCoroutine(EnemyCycle());
-
     }
 
     protected abstract void IdleAction();

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d920e46ff522f740b5fe22cd0c3c1c5, type: 3}
   m_Name: New Enemy Data
   m_EditorClassIdentifier: 
-  hp: 10
-  speed: 5
-  attackDistance: 2
+  speed: 3
+  attackDistance: 1
+  checkDistance: 5
   cycleDelay: 0.1

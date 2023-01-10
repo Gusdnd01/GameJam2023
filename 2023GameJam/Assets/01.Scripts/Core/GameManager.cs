@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
-
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +12,11 @@ public class GameManager : MonoBehaviour
     public Transform PlayerTrm => _playerTrm;
 
     public static GameManager Instance;
+    public Animator[] anims;
+
     Button startButton;
     private void Awake()
     {
-        _playerTrm = GameObject.Find("Player").transform;
 
         if(Instance != null)
         {
@@ -35,7 +36,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField] GameObject player; 
+    [SerializeField] GameObject spawnParticle; 
+
+    [SerializeField] RectTransform joyStick;
+
     void GameStart(){
-        SceneManager.LoadScene("HyunMap");
+        startButton.interactable = false;
+        joyStick.DOAnchorPosY(-610, .5f,true);
+
+        Destroy(GameObject.Find("PlayerAnim"));
+
+        GameObject obj = Instantiate(player,new Vector3(0, -3.5f, 0), Quaternion.identity);
+        CameraManager.Instance.PlayerCamAssign();
+
+        GameObject instantiateParticle = Instantiate(spawnParticle, obj.transform.position, Quaternion.identity);
+        instantiateParticle.GetComponent<ParticleSystem>().Play();
+        CameraManager.Instance.PlayerCamActive(15, 10);
+        Destroy(instantiateParticle, 3f);
+
+        _playerTrm = GameObject.Find("Player(Clone)").transform;
+        foreach(Animator animator in anims){
+            animator.SetTrigger("Start");
+        }
     }
 }
