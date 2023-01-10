@@ -16,22 +16,13 @@ public class MapSpawn : MonoBehaviour
 
     [SerializeField] private NeedDoorPos need;
     private MapList mapList;
-
-
     public bool Spawned = false;
 
 
-    // public Vector3 DoorPos;
-    // public Vector3 DoorSize;
-    // public Transform Pos;
 
-    // [SerializeField] private LayerMask isLayer;
-
-
-    private void Awake()
+    private void Start()
     {
         mapList = FindObjectOfType<MapList>();
-        SpawnNextMap();
     }
 
 
@@ -41,7 +32,6 @@ public class MapSpawn : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !Spawned)
         {
             SpawnNextMap();
-            Spawned = true;
         }
     }
 
@@ -73,14 +63,7 @@ public class MapSpawn : MonoBehaviour
                 mapList.SpawnRoom.Add(roomR);
                 break;
         }
-
+        Spawned = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-
-        }
-    }
 }

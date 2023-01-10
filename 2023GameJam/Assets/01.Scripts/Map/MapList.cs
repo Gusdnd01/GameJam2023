@@ -16,15 +16,21 @@ public class MapList : MonoBehaviour
 
     private void Start()
     {
-        Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+        //Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
     }
 
     private void FixedUpdate()
     {
+
+
         if (SpawnRoom.Count > 2)
         {
             Destroy(SpawnRoom[0]);
             SpawnRoom.RemoveAt(0);
+            Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+        }
+        else if (SpawnRoom.Count == 2 && SpawnRoom[0].transform.childCount > 3)
+        {
             Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
         }
     }

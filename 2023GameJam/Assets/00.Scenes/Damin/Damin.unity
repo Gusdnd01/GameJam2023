@@ -1395,9 +1395,10 @@ MonoBehaviour:
   - {fileID: 6525688572232030789, guid: c6f34cdec5a2a794286e76cafab5d97f, type: 3}
   - {fileID: 6281770927942854753, guid: 409cee43e7575394790672ddf805b377, type: 3}
   NeedL:
-  - {fileID: 8677580413732386585, guid: 629258d245ad79d4aa4e09f09747ec37, type: 3}
-  - {fileID: 4779179049874199237, guid: 9d408e05cf36ff440a7e6f81e9a4b49d, type: 3}
-  - {fileID: 7958708576674140767, guid: 4b9712de0e1570b4786ba3c85b4a05e3, type: 3}
+  - {fileID: 777541579334300758, guid: cfd0eeb36a30b0145b799dd56be84a00, type: 3}
+  - {fileID: 6584718765286981204, guid: 497de446760f5404db1b16c161481145, type: 3}
+  - {fileID: 630790174026433139, guid: 0fc7a4b7cb6d6444ab3be198d82d29ed, type: 3}
+  SpawnRoom: []
 --- !u!114 &1158385699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,7 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   need: 0
-  HitDoor: 0
+  Spawned: 0
 --- !u!1 &1530640872
 GameObject:
   m_ObjectHideFlags: 0
