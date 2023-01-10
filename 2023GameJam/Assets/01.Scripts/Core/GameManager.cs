@@ -42,13 +42,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] RectTransform joyStick;
 
     void GameStart(){
+        startButton.interactable = false;
         joyStick.DOAnchorPosY(-610, .5f,true);
 
         Destroy(GameObject.Find("PlayerAnim"));
 
         GameObject obj = Instantiate(player,new Vector3(0, -3.5f, 0), Quaternion.identity);
+        CameraManager.Instance.PlayerCamAssign();
+
         GameObject instantiateParticle = Instantiate(spawnParticle, obj.transform.position, Quaternion.identity);
         instantiateParticle.GetComponent<ParticleSystem>().Play();
+        CameraManager.Instance.PlayerCamActive(15, 10);
         Destroy(instantiateParticle, 3f);
 
         _playerTrm = GameObject.Find("Player(Clone)").transform;
