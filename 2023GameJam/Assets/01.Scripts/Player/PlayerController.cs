@@ -21,12 +21,12 @@ public class PlayerController : MonoBehaviour, IDamaged
     }
 
     private void Movement(){
-        Vector2 dir = Vector2.right * joyStick.Horizontal + Vector2.up * joyStick.Vertical;
+        Vector2 dir = Vector2.right * joyStick.Horizontal + Vector2.up * joyStick.Vertical * TimeManager.TimeScale;
 
-        anim.SetFloat("MoveX", dir.x);
-        anim.SetFloat("MoveY", dir.y);
+        anim.SetFloat("MoveX", dir.x* TimeManager.TimeScale);
+        anim.SetFloat("MoveY", dir.y* TimeManager.TimeScale);
 
-        rb.velocity = dir *speed;
+        rb.velocity = dir *speed * TimeManager.TimeScale;
     }
 
     public void OnDamaged(float damage){
