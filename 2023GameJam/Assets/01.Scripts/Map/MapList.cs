@@ -12,11 +12,12 @@ public class MapList : MonoBehaviour
     public List<GameObject> NeedL;
 
     public List<GameObject> SpawnRoom;
-    private int RoomCount;
+    private MapSpawn mapSpawn;
 
     private void Start()
     {
-        //Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+        mapSpawn = GetComponent<MapSpawn>();
+        mapSpawn.SpawnNextMap();
     }
 
     private void FixedUpdate()
@@ -32,6 +33,7 @@ public class MapList : MonoBehaviour
         else if (SpawnRoom.Count == 2 && SpawnRoom[0].transform.childCount > 3)
         {
             Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+            Destroy(GameObject.Find("FirstMap"));
         }
     }
 }

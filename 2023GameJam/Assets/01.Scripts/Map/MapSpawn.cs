@@ -20,7 +20,7 @@ public class MapSpawn : MonoBehaviour
 
 
 
-    private void Start()
+    private void Awake()
     {
         mapList = FindObjectOfType<MapList>();
     }
@@ -36,7 +36,7 @@ public class MapSpawn : MonoBehaviour
     }
 
     int RandomMap;
-    private void SpawnNextMap()
+    public void SpawnNextMap()
     {
         //mapList.SpawnRoom[0].GetComponent<DoorBreak>().
 
