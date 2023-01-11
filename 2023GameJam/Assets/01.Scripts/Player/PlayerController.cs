@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour, IDamaged
     
     private Rigidbody2D rb;
 
+    SpriteRenderer spriteRenderer;
+
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         joyStick= FindObjectOfType<FixedJoystick>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update() {
@@ -31,13 +34,28 @@ public class PlayerController : MonoBehaviour, IDamaged
 
     public void OnDamaged(float damage){
         hp -= damage;
+        anim.SetTrigger("Hit");
+        StartCoroutine(HitEffect());
         if(hp <= 0){
             OnDie();
         }
     }
+    IEnumerator HitEffect(){
+        spriteRenderer.color = Color.red;
+        yield return new WaitForSeconds(.1f);
+        spriteRenderer.color = Color.white;
+    }
 
     private void OnDie(){
-        anim.SetBool("Die", true);
+        StartCoroutine(Die());
         speed = 0;
+    }
+
+    IEnumerator Die(){
+        GameManager.Instance.enemySpawner.parts.Play();
+        TimeManager.TimeScale = 0;
+        yield return new WaitForSeconds(.5f);
+        Destroy(gameObject);
+        GameUI.Instance.MoveDown();
     }
 }

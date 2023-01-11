@@ -13,10 +13,11 @@ public class Enemy : EnemyBase
     {
         //애니메이션 추가
         Collider2D cols = Physics2D.OverlapCircle(transform.position, 1f, LayerMask.GetMask("Player"));
-        if(cols!=null){
+        if (cols != null)
+        {
             cols.GetComponent<IDamaged>().OnDamaged(5f);
         }
-        
+
         speed = .1f;
         _rb.velocity = moveDir;
     }
@@ -31,7 +32,14 @@ public class Enemy : EnemyBase
     {
         float distance;
         print(target);
-        distance = Vector2.Distance(transform.position, target.position);
+        if (target != null)
+        {
+
+            distance = Vector2.Distance(transform.position, target.position);
+        }
+        else{
+            distance = 100;
+        }
         return distance;
     }
 

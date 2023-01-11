@@ -7,11 +7,14 @@ public class EnemySpawner : MonoBehaviour
     public List<GameObject> EnemyList;
     [SerializeField] private List<GameObject> EnemyOBJ;
     [SerializeField] private int SpawnCount = 5;
+    private MapManager mapManager;
     private BoxCollider2D col;
+    public ParticleSystem parts;
 
     void Start()
     {
         col = GetComponent<BoxCollider2D>();
+        mapManager = FindObjectOfType<MapManager>();
     }
 
     // Update is called once per frame
@@ -19,19 +22,22 @@ public class EnemySpawner : MonoBehaviour
     {
 
     }
-
-    public void EnemySpawn()
-    {
+    public void EnemyDespawn(){
+        SoundManager.Instance.SFXPlay(0);
         foreach (GameObject CurrentEnemy in EnemyList)
         {
             Destroy(CurrentEnemy);
         }
-
+        parts.Play();
         EnemyList.Clear();
+    }
 
+    public void EnemySpawn()
+    {
+        mapManager.MagicPoof[1].Play();
         int ran;
         GameObject enemy;
-        for (int i = 0; i < SpawnCount; i++)
+        for (int i = 0; i < SpawnCount; i++)    
         {
             ran = Random.Range(0, EnemyOBJ.Count);
             enemy = Instantiate(EnemyOBJ[ran], EnemySpawnPos(), Quaternion.identity);
@@ -52,5 +58,27 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 respawnPosition = originPosition + RandomPostion;
         return respawnPosition;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+            mapManager.isMap = true;
+            mapManager.IsPlayerHere = true;
+            EnemySpawn();
+        }
+    }
+
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Player"))
+        {
+
+            mapManager.isMap = false;
+            mapManager.IsPlayerHere = false;
+        }
     }
 }

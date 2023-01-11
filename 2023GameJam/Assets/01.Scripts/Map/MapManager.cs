@@ -2,8 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using TMPro;
 public class MapManager : MonoBehaviour
 {
 
@@ -17,9 +16,12 @@ public class MapManager : MonoBehaviour
     public List<GameObject> SpawnRoom;
     public List<GameObject> Decorations;
     public List<ParticleSystem> MagicPoof;
+    [SerializeField] private GameObject timer;
+
 
     [Space]
     public float nowTimer;
+    public bool IsPlayerHere;
 
     public GameObject EnemySpawner;
     private EnemySpawner enemySpawner;
@@ -47,60 +49,83 @@ public class MapManager : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         mapSpawn = GetComponent<MapSpawn>();
         //mapSpawn.SpawnNextMap();
+        timerTxt = timer.GetComponent<TextMeshProUGUI>();
     }
+
+    TextMeshProUGUI timerTxt;
+
+    public bool isMap;
 
     private void Update()
     {
-        if (nowTimer > 0)
+        if (GameManager.Instance.isStart && isMap)
         {
-            nowTimer -= Time.deltaTime;
+            if (nowTimer > 0)
+            {
+                timer.SetActive(true);
+                timerTxt.text = $"{(int)nowTimer}초간 도망치세요!";
+                nowTimer -= Time.deltaTime;
+            }
+            else
+            {
+                enemySpawner.EnemyDespawn();
+                // if (SpawnRoom.Count < 1)
+                // {
+                //     mapSpawn.SpawnNextMap();
+                // }
+                if (SpawnRoom.Count >= 1 && IsPlayerHere)
+                {
+                    DestroyRoom();
+                    SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
+                }
+                // else
+                // {
+                //     DestroyRoom();
+                //     // foreach (GameObject obj in SpawnRoom)
+                //     // {
+                //     //     obj.GetComponentInChildren<MapSpawn>().SpawnNextMap();
+                //     // }
+                //     SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
+                //     //return;
+                // }
+                timer.SetActive(false);
+            }
         }
         else
         {
-            if (SpawnRoom.Count < 1)
-            {
-                mapSpawn.SpawnNextMap();
-            }
-            else if (SpawnRoom.Count >= 1)
-            {
-                DestroyRoom();
-                SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
-            }
-            // else
-            // {
-            //     DestroyRoom();
-            //     // foreach (GameObject obj in SpawnRoom)
-            //     // {
-            //     //     obj.GetComponentInChildren<MapSpawn>().SpawnNextMap();
-            //     // }
-            //     SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
-            //     //return;
-            // }
+            return;
         }
     }
 
+    //&& SpawnRoom[0].transform.childCount > 4
     private void DestroyRoom()
     {
+        GameObject MapDoor;
+
         if (SpawnRoom.Count > 1)
         {
             MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
             MagicPoof[0].Play();
-
+            SoundManager.Instance.SFXPlay(0);
             Destroy(SpawnRoom[0]);
             SpawnRoom.RemoveAt(0);
-            Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+            MapDoor = SpawnRoom[0].transform.GetChild(3).gameObject;
+            MapDoor.SetActive(false);
         }
-        else if (SpawnRoom.Count == 2 && SpawnRoom[0].transform.childCount > 4)
+        else if (SpawnRoom.Count == 2)
         {
             MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
             MagicPoof[0].Play();
-
-            Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+            SoundManager.Instance.SFXPlay(0);
+            MapDoor = SpawnRoom[0].transform.GetChild(3).gameObject;
+            MapDoor.SetActive(false);
             Destroy(GameObject.Find("FirstMap"));
         }
         else
         {
-            Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+            MapDoor = SpawnRoom[0].transform.GetChild(3).gameObject;
+            SoundManager.Instance.SFXPlay(0);
+            MapDoor.SetActive(false);
             Destroy(GameObject.Find("FirstMap"));
         }
     }

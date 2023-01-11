@@ -30,10 +30,10 @@ public class MapSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !Spawned)
+/*         if (Input.GetKeyDown(KeyCode.Space) && !Spawned)
         {
             SpawnNextMap();
-        }
+        } */
     }
 
     int RandomMap;
@@ -56,6 +56,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                SoundManager.Instance.SFXPlay(0);
                 mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Bottom:
@@ -67,6 +68,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                SoundManager.Instance.SFXPlay(0);
                 mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Left:
@@ -78,6 +80,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                SoundManager.Instance.SFXPlay(0);
                 mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Right:
@@ -89,11 +92,10 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                SoundManager.Instance.SFXPlay(0);
                 mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
         }
-        enemySpawner.EnemySpawn();
-        Spawned = true;
     }
 
 }
