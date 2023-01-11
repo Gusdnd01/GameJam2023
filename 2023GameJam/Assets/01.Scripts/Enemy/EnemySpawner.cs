@@ -27,9 +27,11 @@ public class EnemySpawner : MonoBehaviour
             Destroy(CurrentEnemy);
         }
 
+        EnemyList.Clear();
+
         int ran;
         GameObject enemy;
-        for (int i = 0; i > 5; i++)
+        for (int i = 0; i < SpawnCount; i++)
         {
             ran = Random.Range(0, EnemyOBJ.Count);
             enemy = Instantiate(EnemyOBJ[ran], EnemySpawnPos(), Quaternion.identity);
@@ -46,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 
         range_X = Random.Range((range_X / 2) * -1, range_X / 2);
         range_Y = Random.Range((range_Y / 2) * -1, range_Y / 2);
-        Vector3 RandomPostion = new Vector3(range_X, 0f, range_Y);
+        Vector3 RandomPostion = new Vector3(range_X, range_Y, 0);
 
         Vector3 respawnPosition = originPosition + RandomPostion;
         return respawnPosition;
