@@ -670,9 +670,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d50ee44692bee648a671605f8f6c27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyList:
-  - {fileID: 7600403045781339903, guid: 6cb4d104464f3fa4dbf17a5c1bffcf44, type: 3}
-  EnemyOBJ: []
+  EnemyList: []
+  EnemyOBJ:
+  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
+  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
+  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
   SpawnCount: 5
 --- !u!1 &745830509
 GameObject:
