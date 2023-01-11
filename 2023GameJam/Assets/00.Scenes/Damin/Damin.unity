@@ -672,9 +672,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyList: []
   EnemyOBJ:
-  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
-  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
-  - {fileID: 3581218795045685790, guid: c00e0853763bc1547bc0469c784d4814, type: 3}
+  - {fileID: 5498822860709435582, guid: 80a4a0aecf23f9e4fac9a7102dccd198, type: 3}
+  - {fileID: 5498822860709435582, guid: 80a4a0aecf23f9e4fac9a7102dccd198, type: 3}
+  - {fileID: 5498822860709435582, guid: 80a4a0aecf23f9e4fac9a7102dccd198, type: 3}
   SpawnCount: 5
 --- !u!1 &745830509
 GameObject:

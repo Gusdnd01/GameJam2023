@@ -1849,7 +1849,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000174accd0
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -5041,7 +5041,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterMixer: {fileID: 24100000, guid: 2f5e0a25c79bed44b815f7ca6ce70f3c, type: 2}
-  bgmClips: []
+  bgmClips:
+  - {fileID: 8300000, guid: 0768bd034d5d44d4da79b872083efe48, type: 3}
+  - {fileID: 8300000, guid: 58ff58be96a5ed048b2229db87884d15, type: 3}
   sfxClips: []
   bgm: {fileID: 1790299094}
   sfx: {fileID: 1790299093}

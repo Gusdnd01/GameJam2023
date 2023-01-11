@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     private Transform _playerTrm;
     public Transform PlayerTrm => _playerTrm;
-    
+
     public static GameManager Instance;
     public Animator[] anims;
 
@@ -19,73 +19,90 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
 
-        if(Instance != null)
+        if (Instance != null)
         {
             Debug.LogError("Multiple GameManger is running");
         }
         Instance = this;
 
-        try{
+        try
+        {
             startButton = GameObject.Find("StartButton").GetComponent<Button>();
 
-            startButton.onClick.AddListener(()=>{
+            startButton.onClick.AddListener(() =>
+            {
                 GameStart();
             });
         }
-        catch(NullReferenceException){
+        catch (NullReferenceException)
+        {
             return;
         }
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.BGMPlay(0);
     }
 
     public Animator pausePanelAnim;
     public Animator settingPanelAnim;
 
-    public void PausePanelActive(){
+    public void PausePanelActive()
+    {
         pausePanelAnim.SetTrigger("Start");
         pauseButton.interactable = false;
         TimeManager.TimeScale = 0;
     }
-    public void ResumeBtnOnClicked(){
+    public void ResumeBtnOnClicked()
+    {
         print("Up!!");
         TimeManager.TimeScale = 1;
         pausePanelAnim.SetTrigger("Up");
         pauseButton.interactable = true;
     }
 
-    public void QuitBtnOnClicked(){
+    public void QuitBtnOnClicked()
+    {
         print("QuitGame!!");
         Application.Quit();
     }
 
-    public void SettingBtnOnClicked(){
+    public void SettingBtnOnClicked()
+    {
         pausePanelAnim.SetTrigger("Up");
         //설정창 켜주기
         settingPanelAnim.SetTrigger("Start");
     }
 
-    public void SettingPanelDisable(){
+    public void SettingPanelDisable()
+    {
         Sequence seq = DOTween.Sequence();
         pausePanelAnim.SetTrigger("Start");
         settingPanelAnim.SetTrigger("Up");
         seq.AppendInterval(1f);
-        seq.Append(settingPanelAnim.GetComponent<RectTransform>().DOAnchorPosX(-1000,0));
-        seq.AppendCallback(()=>{
+        seq.Append(settingPanelAnim.GetComponent<RectTransform>().DOAnchorPosX(-1000, 0));
+        seq.AppendCallback(() =>
+        {
             seq.Kill();
         });
     }
 
-    [SerializeField] GameObject player; 
-    [SerializeField] GameObject spawnParticle; 
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject spawnParticle;
 
     [SerializeField] RectTransform joyStick;
 
-    void GameStart(){
+    void GameStart()
+    {
+        SoundManager.Instance.BGMPlay(1);
+
         startButton.gameObject.SetActive(false);
-        joyStick.DOAnchorPosY(-610, .5f,true);
+        joyStick.DOAnchorPosY(-610, .5f, true);
 
         Destroy(GameObject.Find("PlayerAnim"));
 
-        GameObject obj = Instantiate(player,new Vector3(0, -3.5f, 0), Quaternion.identity);
+        GameObject obj = Instantiate(player, new Vector3(0, -3.5f, 0), Quaternion.identity);
         CameraManager.Instance.PlayerCamAssign();
 
         GameObject instantiateParticle = Instantiate(spawnParticle, obj.transform.position, Quaternion.identity);
@@ -94,9 +111,11 @@ public class GameManager : MonoBehaviour
         Destroy(instantiateParticle, 3f);
 
         _playerTrm = GameObject.Find("Player(Clone)").transform;
-        foreach(Animator animator in anims){
+        foreach (Animator animator in anims)
+        {
             animator.SetTrigger("Start");
-            if(animator.GetComponentInChildren<ParticleSystem>() != null){
+            if (animator.GetComponentInChildren<ParticleSystem>() != null)
+            {
                 animator.GetComponentInChildren<ParticleSystem>().Play();
             }
         }
