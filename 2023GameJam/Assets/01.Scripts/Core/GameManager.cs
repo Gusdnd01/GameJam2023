@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
 
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        SoundManager.Instance.BGMPlay(0);
     }
 
     public Animator pausePanelAnim;
@@ -92,9 +93,9 @@ public class GameManager : MonoBehaviour
         isStart = true;
         startButton.gameObject.SetActive(false);
         joyStick.DOAnchorPosY(-610, .5f,true);
-
+        SoundManager.Instance.BGMPlay(1);
         Destroy(GameObject.Find("PlayerAnim"));
-        SoundManager.Instance.SFXPlay(0);
+        SoundManager.Instance.SFXPlay(1);
 
         GameObject obj = Instantiate(player,new Vector3(0, -3.5f, 0), Quaternion.identity);
         CameraManager.Instance.PlayerCamAssign();

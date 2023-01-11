@@ -42,6 +42,10 @@ public class SoundManager : MonoSingleton<SoundManager>
         bgm.Play();
     }
 
+    public void BGMStop(){
+        bgm.Stop();
+    }
+
     public void SFXPlay(int index){
         sfx.clip = sfxClips[index];
         sfx.Play();

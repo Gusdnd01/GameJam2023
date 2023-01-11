@@ -57,5 +57,6 @@ public class PlayerController : MonoBehaviour, IDamaged
         yield return new WaitForSeconds(.5f);
         Destroy(gameObject);
         GameUI.Instance.MoveDown();
+        SoundManager.Instance.SFXPlay(2);
     }
 }

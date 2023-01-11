@@ -34,7 +34,7 @@ public class MapManager : MonoBehaviour
         set
         {
             Score += ((Stage * enemySpawner.EnemyList.Count) + 5);
-            nowTimer = 5 + ((stage % 100 / 10) * 5);
+            nowTimer = 10 + ((stage % 100 / 10) * 5);
             stage = value;
         }
     }
@@ -63,8 +63,8 @@ public class MapManager : MonoBehaviour
             if (nowTimer > 0)
             {
                 timer.SetActive(true);
-                timerTxt.text = $"{(int)nowTimer}초간 도망치세요!";
-                nowTimer -= Time.deltaTime;
+                timerTxt.text = $"{(int)nowTimer+1}초간 도망치세요!";
+                nowTimer -= TimeManager.DeltaTime;
             }
             else
             {
