@@ -59,6 +59,10 @@ public class GameUI : MonoBehaviour
         //GameoverRect.DOAnchorPosY(1939.68f, 1.5f).SetEase(Ease.InExpo).SetEase(Ease.OutBounce);
     }
 
+    public void Quit(){
+        Application.Quit();
+    }
+
 
     public void ReStart()
     {

@@ -12,7 +12,7 @@ public class Enemy : EnemyBase
     protected override void AttackAction()
     {
         //애니메이션 추가
-        Collider2D cols = Physics2D.OverlapCircle(transform.position, 1f, LayerMask.GetMask("Player"));
+        Collider2D cols = Physics2D.OverlapCircle(transform.position, 2f, LayerMask.GetMask("Player"));
         if (cols != null)
         {
             cols.GetComponent<IDamaged>().OnDamaged(5f);
@@ -25,6 +25,7 @@ public class Enemy : EnemyBase
     protected override void DieAction()
     {
         moveDir = Vector2.zero;
+        _rb.velocity = moveDir;
         speed = 0;
     }
 
