@@ -64,8 +64,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void SettingPanelDisable(){
-        settingPanelAnim.SetTrigger("Up");
+        Sequence seq = DOTween.Sequence();
         pausePanelAnim.SetTrigger("Start");
+        settingPanelAnim.SetTrigger("Up");
+        seq.AppendInterval(1f);
+        seq.Append(settingPanelAnim.GetComponent<RectTransform>().DOAnchorPosX(-1000,0));
+        seq.AppendCallback(()=>{
+            seq.Kill();
+        });
     }
 
     [SerializeField] GameObject player; 
@@ -76,7 +82,6 @@ public class GameManager : MonoBehaviour
     void GameStart(){
         startButton.gameObject.SetActive(false);
         joyStick.DOAnchorPosY(-610, .5f,true);
-
 
         Destroy(GameObject.Find("PlayerAnim"));
 
@@ -91,6 +96,9 @@ public class GameManager : MonoBehaviour
         _playerTrm = GameObject.Find("Player(Clone)").transform;
         foreach(Animator animator in anims){
             animator.SetTrigger("Start");
+            if(animator.GetComponentInChildren<ParticleSystem>() != null){
+                animator.GetComponentInChildren<ParticleSystem>().Play();
+            }
         }
     }
 }
