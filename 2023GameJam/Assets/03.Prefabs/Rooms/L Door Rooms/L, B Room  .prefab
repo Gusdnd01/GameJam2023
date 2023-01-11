@@ -28,9 +28,9 @@ Transform:
   m_LocalPosition: {x: 18.15, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
+  - {fileID: 2395488069281606372}
   - {fileID: 883768173593298415}
   - {fileID: 1321512450269745168}
-  - {fileID: 2395488069281606372}
   - {fileID: 5255855367673769178}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -261,7 +261,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 854912325021936769}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &8071425505491055759
 Tilemap:
@@ -791,7 +791,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 854912325021936769}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1839735485 &523913094567427643
 Tilemap:
@@ -1652,7 +1652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3378452389428696547, guid: 898cd3c1646f6744a81823dffcc5caff, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3378452389428696547, guid: 898cd3c1646f6744a81823dffcc5caff, type: 3}
       propertyPath: m_LocalPosition.x

@@ -15,14 +15,15 @@ public class MapSpawn : MonoBehaviour
     };
 
     [SerializeField] private NeedDoorPos need;
-    private MapManager mapList;
     public bool Spawned = false;
 
-
+    private MapManager mapList;
+    private EnemySpawner enemySpawner;
 
     private void Awake()
     {
         mapList = FindObjectOfType<MapManager>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
 
@@ -40,6 +41,8 @@ public class MapSpawn : MonoBehaviour
     {
         GameObject roomOBJ;
         GameObject deco;
+
+        mapList.Stage++;
         //GameObject par;
 
         switch (need)
@@ -53,6 +56,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Bottom:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedBoT.Count);
@@ -63,6 +67,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Left:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedL.Count);
@@ -73,6 +78,7 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
             case NeedDoorPos.Right:
                 RandomMap = UnityEngine.Random.Range(0, mapList.NeedR.Count);
@@ -83,8 +89,10 @@ public class MapSpawn : MonoBehaviour
                 deco.transform.SetParent(roomOBJ.transform);
                 mapList.MagicPoof[1].transform.position = roomOBJ.transform.position;
                 mapList.MagicPoof[1].Play();
+                mapList.EnemySpawner.transform.position = roomOBJ.transform.position;
                 break;
         }
+        enemySpawner.EnemySpawn();
         Spawned = true;
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +15,14 @@ public class MapManager : MonoBehaviour
 
 
     public List<GameObject> SpawnRoom;
-    [Space]
     public List<GameObject> Decorations;
-    [Space]
     public List<ParticleSystem> MagicPoof;
+
+    [Space]
     public float nowTimer;
+
+    public GameObject EnemySpawner;
+    private EnemySpawner enemySpawner;
     private MapSpawn mapSpawn;
     int stage;
 
@@ -27,16 +31,22 @@ public class MapManager : MonoBehaviour
         get => stage;
         set
         {
-            nowTimer = 30 + ((stage % 100 / 10) * 5);
+            Score += ((Stage * enemySpawner.EnemyList.Count) + 5);
+            nowTimer = 5 + ((stage % 100 / 10) * 5);
             stage = value;
         }
     }
 
+    int score;
+    public int Score { get; set; }
+
+
     private void Start()
     {
-        stage = 0;
+        //stage = 0;
+        enemySpawner = FindObjectOfType<EnemySpawner>();
         mapSpawn = GetComponent<MapSpawn>();
-        mapSpawn.SpawnNextMap();
+        //mapSpawn.SpawnNextMap();
     }
 
     private void Update()
@@ -47,20 +57,31 @@ public class MapManager : MonoBehaviour
         }
         else
         {
-            if (SpawnRoom.Count > 2)
+            if (SpawnRoom.Count < 1)
             {
-                SpawnRoom[1].GetComponent<MapSpawn>().SpawnNextMap();
+                mapSpawn.SpawnNextMap();
             }
-            else
+            else if (SpawnRoom.Count >= 1)
             {
-                SpawnRoom[0].GetComponent<MapSpawn>().SpawnNextMap();
+                DestroyRoom();
+                SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
             }
+            // else
+            // {
+            //     DestroyRoom();
+            //     // foreach (GameObject obj in SpawnRoom)
+            //     // {
+            //     //     obj.GetComponentInChildren<MapSpawn>().SpawnNextMap();
+            //     // }
+            //     SpawnRoom[0].GetComponentInChildren<MapSpawn>().SpawnNextMap();
+            //     //return;
+            // }
         }
     }
 
     private void DestroyRoom()
     {
-        if (SpawnRoom.Count > 2)
+        if (SpawnRoom.Count > 1)
         {
             MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
             MagicPoof[0].Play();
@@ -74,6 +95,11 @@ public class MapManager : MonoBehaviour
             MagicPoof[0].transform.position = SpawnRoom[0].transform.position;
             MagicPoof[0].Play();
 
+            Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
+            Destroy(GameObject.Find("FirstMap"));
+        }
+        else
+        {
             Destroy(SpawnRoom[0].transform.GetChild(3).gameObject);
             Destroy(GameObject.Find("FirstMap"));
         }
