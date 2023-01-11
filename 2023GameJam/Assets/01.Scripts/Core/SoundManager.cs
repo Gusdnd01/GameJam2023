@@ -1,45 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : MonoSingleton<SoundManager>
 {
-    public static SoundManager Instance;
+    [SerializeField] private AudioMixer masterMixer;
 
-    [SerializeField] private AudioMixer _masterMixer;
+    [SerializeField] AudioClip[] bgmClips;
+    [SerializeField] AudioClip[] sfxClips;
 
-    private AudioSource _bgmSource;
+    [SerializeField] private AudioSource bgm;
+    [SerializeField] private AudioSource sfx;
+    
+    [SerializeField] Slider masterSlider;
+    [SerializeField] Slider bgmSlider;
+    [SerializeField] Slider sfxSlider;
 
-    private void Start() {
-        _bgmSource = Camera.main.GetComponent<AudioSource>();
-    }
+    string sliderName = "";
 
-    public void StopBGM(){
-        _bgmSource.Stop();
-    }
-
-    public void BGMPause(bool pause){
-        if(pause) _bgmSource.Pause();
-        else _bgmSource.UnPause();
-    }
-
-    public void PlayBGM(AudioClip clip){
-        _bgmSource.clip = clip;
-        _bgmSource.loop = true;
-        _bgmSource.Play();
-    }
-
-    public void PlayOneShot(AudioSource source, AudioClip clip) => source.PlayOneShot(clip);
-
-    public void PlayOneShot(AudioSource source, string clipName){
-        AudioClip clip = Resources.Load<AudioClip>($"AudioClip/SFX/{clipName}");
-
-        if(clip != null){
-            source.PlayOneShot(clip);
+    public void ChangeSliderValues(string name){
+        sliderName =name;
+        switch(sliderName){
+            case "master":
+                masterMixer.SetFloat("Master", masterSlider.value);
+                break;
+            case "bgm":
+                masterMixer.SetFloat("BGM", bgmSlider.value);
+                break;
+            case "sfx":
+                masterMixer.SetFloat("SFX", sfxSlider.value);
+                break;
+            default:
+                break;
         }
-        else{
-            Debug.LogError($"Has not exist {clipName} audioClip in Resource folder");
-        }
+    }
+
+    public void BGMPlay(int index){
+        bgm.clip = bgmClips[index];
+        bgm.Play();
+    }
+
+    public void SFXPlay(int index){
+        sfx.clip = sfxClips[index];
+        sfx.Play();
     }
 }

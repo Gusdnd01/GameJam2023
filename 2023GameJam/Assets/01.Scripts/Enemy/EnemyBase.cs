@@ -27,6 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
 
     IEnumerator EnemyCycle(){
         while(!_isDie){
+            yield return new WaitUntil(()=>TimeManager.TimeScale!=0);
             ChangeAction();
             switch((int)state){
                 case 0:
